@@ -1,4 +1,5 @@
 //const arrQuestionText = { 1:"What is the Capital City of Romania",2:"What is the Capital City of Finland",3: "What is the Capital Cityof France"}
+// 
 const arrQuestionText = [
     {"question": "What is the Capital City of Romania", "answer": "Bucharest" },
     {"question": "What is the Capital City of Finland", "answer": "Helsinki" },
