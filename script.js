@@ -1,9 +1,9 @@
 //const arrQuestionText = { 1:"What is the Capital City of Romania",2:"What is the Capital City of Finland",3: "What is the Capital Cityof France"}
 // 
 const arrQuestionText = [
-    {"question": "What is the Capital City of Romania", "answer": "Bucharest" },
-    {"question": "What is the Capital City of Finland", "answer": "Helsinki" },
-    {"question": "What is the Capital City of France", "answer": "Paris"}
+    {"question": "What is the Capital City of Romania", "answer": "Bucharest", ifAsked : false },
+    {"question": "What is the Capital City of Finland", "answer": "Helsinki", ifAsked : false  },
+    {"question": "What is the Capital City of France", "answer": "Paris", ifAsked: false}
 ]
 let displayEl = document.getElementById("questionText")
 let qHealthEl = document.getElementById("questionHealth")
@@ -11,6 +11,7 @@ document.getElementById("firstAnswer").style.visibility = "hidden"
 document.getElementById("secondAnswer").style.visibility = "hidden"
 document.getElementById("thirdAnswer").style.visibility = "hidden"
 document.getElementById("playAgain").style.visibility = "hidden"
+document.getElementById("tryagain").style.visibility = "hidden"
 let iRandomNumber = 0
 iRandomNumber = Math.floor( Math.random()*2)
 let firtsQuestion = arrQuestionText[iRandomNumber]["question"]
@@ -61,7 +62,12 @@ function firstAnswerGuess() {
    document.getElementById("firstAnswer").style.visibility = "hidden"
    document.getElementById("secondAnswer").style.visibility = "hidden"
    document.getElementById("thirdAnswer").style.visibility = "hidden"
-   document.getElementById("playAgain").style.visibility = "visible"
+   if (qHealthEl.textContent == "Correct!") {
+    document.getElementById("playAgain").style.visibility = "visible"
+   } else {
+    alert("Try Again") 
+    document.getElementById("tryagain").style.visibility = "visible" 
+ }
 }
 
 function secondAnswerGuess () {     
@@ -73,7 +79,12 @@ function secondAnswerGuess () {
    document.getElementById("firstAnswer").style.visibility = "hidden"
    document.getElementById("secondAnswer").style.visibility = "hidden"
    document.getElementById("thirdAnswer").style.visibility = "hidden"
-   document.getElementById("playAgain").style.visibility = "visible"
+   if (qHealthEl.textContent == "Correct!") {
+    document.getElementById("playAgain").style.visibility = "visible"
+   } else {
+    alert("Try Again")  
+    document.getElementById("tryagain").style.visibility = "visible"
+ }
 }
 
 function thirdAnswerGuess () {
@@ -85,10 +96,17 @@ function thirdAnswerGuess () {
     document.getElementById("firstAnswer").style.visibility = "hidden"
     document.getElementById("secondAnswer").style.visibility = "hidden"
     document.getElementById("thirdAnswer").style.visibility = "hidden" 
+   if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
+   } else {
+    alert("Try Again")  
+    document.getElementById("tryagain").style.visibility = "visible"
+ }
+    
 }
 
 function playAgain() {
+
         iRandomNumber = Math.floor( Math.random()*2) + 1
         firtsQuestion = arrQuestionText[iRandomNumber]["question"] 
         displayEl.textContent = firtsQuestion + "?" 
