@@ -124,5 +124,20 @@ function tryAgain() {
     document.getElementById("tryagain").style.visibility = "hidden"
 }
 
-function playAgain() {          
+function playAgain() {    
+    if (arrQuestionText[0][ifAsked] = true) {
+        function randomNumber (min, max) {
+           return Math.floor(Math.random() * (min -max + 1) + min)
+        }
+        iRandomNumber = randomNumber(1,2)
+    } else if (arrQuestionText[1][ifAsked] = true) {
+            function randomNumber (min, max) {
+                return Math.floor(Math.random() * (min - max +1) +min)
+            }
+        iRandomNumber = randomNumber()
+    } else if () {
+
+    } else {
+     alert("all questions have been answered")
+    }
 }
