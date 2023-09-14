@@ -64,6 +64,7 @@ function firstAnswerGuess() {
    document.getElementById("thirdAnswer").style.visibility = "hidden"
    if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
+    arrQuestionText[0][ifAsked]= true
    } else {
     alert("Try Again") 
     document.getElementById("tryagain").style.visibility = "visible" 
@@ -81,6 +82,7 @@ function secondAnswerGuess () {
    document.getElementById("thirdAnswer").style.visibility = "hidden"
    if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
+    arrQuestionText[1][ifAsked] = true
    } else {
     alert("Try Again")  
     document.getElementById("tryagain").style.visibility = "visible"
@@ -98,6 +100,7 @@ function thirdAnswerGuess () {
     document.getElementById("thirdAnswer").style.visibility = "hidden" 
    if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
+    arrQuestionText[2][ifAsked] = true
    } else {
     alert("Try Again")  
     document.getElementById("tryagain").style.visibility = "visible"
@@ -105,19 +108,21 @@ function thirdAnswerGuess () {
     
 }
 
-function playAgain() {
+function tryAgain() {
+    iRandomNumber = Math.floor( Math.random()*2) + 1
+    firtsQuestion = arrQuestionText[iRandomNumber]["question"] 
+    displayEl.textContent = firtsQuestion + "?" 
+    if (firtsQuestion == arrQuestionText[iRandomNumber]["question"]) {
+        correctAnswer = arrQuestionText[iRandomNumber]["answer"]
+    } else {
+        correctAnswer = ""
+    }    
+    document.getElementById("firstAnswer").style.visibility = "visible"
+    document.getElementById("secondAnswer").style.visibility = "visible"
+    document.getElementById("thirdAnswer").style.visibility = "visible"
+    qHealthEl.textContent = ""
+    document.getElementById("tryagain").style.visibility = "hidden"
+}
 
-        iRandomNumber = Math.floor( Math.random()*2) + 1
-        firtsQuestion = arrQuestionText[iRandomNumber]["question"] 
-        displayEl.textContent = firtsQuestion + "?" 
-        if (firtsQuestion == arrQuestionText[iRandomNumber]["question"]) {
-            correctAnswer = arrQuestionText[iRandomNumber]["answer"]
-        } else {
-            correctAnswer = ""
-        }    
-        document.getElementById("firstAnswer").style.visibility = "visible"
-        document.getElementById("secondAnswer").style.visibility = "visible"
-        document.getElementById("thirdAnswer").style.visibility = "visible"
-        qHealthEl.textContent = ""
-          
+function playAgain() {          
 }
