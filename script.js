@@ -131,13 +131,29 @@ function playAgain() {
         }
         iRandomNumber = randomNumber(1,2)
     } else if (arrQuestionText[1][ifAsked] = true) {
-            function randomNumber (min, max) {
+            function randomNumber (min, max, exclude) {
                 return Math.floor(Math.random() * (min - max +1) +min)
             }
-        iRandomNumber = randomNumber()
-    } else if () {
-
+        iRandomNumber = randomNumber(0,2,1)
+    } 
+    else if (arrQuestionText[2][ifAsked]) {
+            function randomNumber (min, max) {
+                return Math.floor(Math.random() * (min - max + 1) + min)
+            }
+        iRandomNumber = randomNumber(0,1)
     } else {
      alert("all questions have been answered")
     }
+   
+    displayEl.textContent = firtsQuestion + "?"  
+    if (firtsQuestion == arrQuestionText[iRandomNumber]["question"]) {
+     correctAnswer = arrQuestionText[iRandomNumber]["answer"]
+ } else {
+     correctAnswer = ""
+ }    
+ 
+ document.getElementById("firstAnswer").style.visibility = "visible"
+ document.getElementById("secondAnswer").style.visibility = "visible"
+ document.getElementById("thirdAnswer").style.visibility = "visible"
+ document.getElementById("tryagain").style.visibility = "hidden"
 }
