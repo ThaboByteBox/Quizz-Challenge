@@ -125,27 +125,32 @@ function tryAgain() {
 }
 
 let allQuestionsAsked = true
-function nextQuestion() {  
-    iRandomNumber2 = 0  
-   for ("question" of arrQuestionText) {
-    if (!arrQuestionText[iRandomNumber2]["ifAsked"] ) {
+function nextQuestion() {   
+   for ( const question of arrQuestionText) {
+    if (!question.ifAsked ) {
         allQuestionsAsked = false
         break
     }
    }
 if (!allQuestionsAsked) {
     do {
-        iRandomNumber2 = Math.floor(Math.random() * arrQuestionText.length -1)
-    } while (arrQuestionText[iRandomNumber]["ifAsked"])
+        iRandomNumber = Math.floor(Math.random() * arrQuestionText.length -1)
+    } while (arrQuestionText[iRandomNumber].ifasked)
 
-    arrQuestionText[iRandomNumber2]["ifAsked"] = true
-    console.log(iRandomNumber2)
+    arrQuestionText[iRandomNumber]["ifAsked"] = true
 }else {
     console.log("All Questions have been asked")
 }
- 
+ firtsQuestion = arrQuestionText[iRandomNumber]["question"]
+ displayEl.textContent = firtsQuestion + " " + "?"
  document.getElementById("firstAnswer").style.visibility = "visible"
  document.getElementById("secondAnswer").style.visibility = "visible"
  document.getElementById("thirdAnswer").style.visibility = "visible"
  document.getElementById("tryagain").style.visibility = "hidden"
+ qHealthEl.textContent = ""
+ if (firtsQuestion == arrQuestionText[iRandomNumber]["question"]) {
+    correctAnswer = arrQuestionText[iRandomNumber]["answer"]
+} else {
+    correctAnswer = ""
+}    
 }
