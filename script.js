@@ -64,7 +64,7 @@ function firstAnswerGuess() {
    document.getElementById("thirdAnswer").style.visibility = "hidden"
    if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
-    arrQuestionText[0][ifAsked]= true
+    arrQuestionText[0]["ifAsked"] = true
    } else {
     alert("Try Again") 
     document.getElementById("tryagain").style.visibility = "visible" 
@@ -82,7 +82,7 @@ function secondAnswerGuess () {
    document.getElementById("thirdAnswer").style.visibility = "hidden"
    if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
-    arrQuestionText[1][ifAsked] = true
+    arrQuestionText[1]["ifAsked"] = true
    } else {
     alert("Try Again")  
     document.getElementById("tryagain").style.visibility = "visible"
@@ -100,7 +100,7 @@ function thirdAnswerGuess () {
     document.getElementById("thirdAnswer").style.visibility = "hidden" 
    if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
-    arrQuestionText[2][ifAsked] = true
+    arrQuestionText[2]["ifAsked"] = true
    } else {
     alert("Try Again")  
     document.getElementById("tryagain").style.visibility = "visible"
@@ -124,33 +124,25 @@ function tryAgain() {
     document.getElementById("tryagain").style.visibility = "hidden"
 }
 
-function playAgain() {    
-    if (arrQuestionText[0][ifAsked] = true) {
-        function randomNumber (min, max) {
-           return Math.floor(Math.random() * (min -max + 1) + min)
-        }
-        iRandomNumber = randomNumber(1,2)
-    } else if (arrQuestionText[1][ifAsked] = true) {
-            function randomNumber (min, max, exclude) {
-                return Math.floor(Math.random() * (min - max +1) +min)
-            }
-        iRandomNumber = randomNumber(0,2,1)
-    } 
-    else if (arrQuestionText[2][ifAsked]) {
-            function randomNumber (min, max) {
-                return Math.floor(Math.random() * (min - max + 1) + min)
-            }
-        iRandomNumber = randomNumber(0,1)
-    } else {
-     alert("all questions have been answered")
+let allQuestionsAsked = true
+function nextQuestion() {  
+    iRandomNumber2 = 0  
+   for ("question" of arrQuestionText) {
+    if (!arrQuestionText[iRandomNumber2]["ifAsked"] ) {
+        allQuestionsAsked = false
+        break
     }
-   
-    displayEl.textContent = firtsQuestion + "?"  
-    if (firtsQuestion == arrQuestionText[iRandomNumber]["question"]) {
-     correctAnswer = arrQuestionText[iRandomNumber]["answer"]
- } else {
-     correctAnswer = ""
- }    
+   }
+if (!allQuestionsAsked) {
+    do {
+        iRandomNumber2 = Math.floor(Math.random() * arrQuestionText.length -1)
+    } while (arrQuestionText[iRandomNumber]["ifAsked"])
+
+    arrQuestionText[iRandomNumber2]["ifAsked"] = true
+    console.log(iRandomNumber2)
+}else {
+    console.log("All Questions have been asked")
+}
  
  document.getElementById("firstAnswer").style.visibility = "visible"
  document.getElementById("secondAnswer").style.visibility = "visible"
