@@ -64,7 +64,7 @@ function firstAnswerGuess() {
    document.getElementById("thirdAnswer").style.visibility = "hidden"
    if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
-    arrQuestionText[0]["ifAsked"] = true
+    arrQuestionText[0].ifAsked = true
    } else {
     alert("Try Again") 
     document.getElementById("tryagain").style.visibility = "visible" 
@@ -82,7 +82,7 @@ function secondAnswerGuess () {
    document.getElementById("thirdAnswer").style.visibility = "hidden"
    if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
-    arrQuestionText[1]["ifAsked"] = true
+    arrQuestionText[1].ifAsked = true
    } else {
     alert("Try Again")  
     document.getElementById("tryagain").style.visibility = "visible"
@@ -100,7 +100,7 @@ function thirdAnswerGuess () {
     document.getElementById("thirdAnswer").style.visibility = "hidden" 
    if (qHealthEl.textContent == "Correct!") {
     document.getElementById("playAgain").style.visibility = "visible"
-    arrQuestionText[2]["ifAsked"] = true
+    arrQuestionText[2].ifAsked = true
    } else {
     alert("Try Again")  
     document.getElementById("tryagain").style.visibility = "visible"
@@ -109,6 +109,7 @@ function thirdAnswerGuess () {
 }
 
 function tryAgain() {
+    
     iRandomNumber = Math.floor( Math.random()*2) + 1
     firtsQuestion = arrQuestionText[iRandomNumber]["question"] 
     displayEl.textContent = firtsQuestion + "?" 
@@ -125,32 +126,41 @@ function tryAgain() {
 }
 
 let allQuestionsAsked = true
+let iQuestionsAsked = 0
 function nextQuestion() {   
-   for ( const question of arrQuestionText) {
-    if (!question.ifAsked ) {
+   for ( iQuestionsAsked = 0; iQuestionsAsked < arrQuestionText.length; iQuestionsAsked++) {
+    if (arrQuestionText[iQuestionsAsked].ifAsked == false ) {
         allQuestionsAsked = false
         break
     }
    }
-if (!allQuestionsAsked) {
+if (allQuestionsAsked == false) {
     do {
-        iRandomNumber = Math.floor(Math.random() * arrQuestionText.length -1)
-    } while (arrQuestionText[iRandomNumber].ifasked)
+       nextQuestion() 
+    } while (arrQuestionText[iQuestionsAsked].ifasked == false)
 
-    arrQuestionText[iRandomNumber]["ifAsked"] = true
 }else {
     console.log("All Questions have been asked")
 }
- firtsQuestion = arrQuestionText[iRandomNumber]["question"]
- displayEl.textContent = firtsQuestion + " " + "?"
- document.getElementById("firstAnswer").style.visibility = "visible"
- document.getElementById("secondAnswer").style.visibility = "visible"
- document.getElementById("thirdAnswer").style.visibility = "visible"
- document.getElementById("tryagain").style.visibility = "hidden"
- qHealthEl.textContent = ""
- if (firtsQuestion == arrQuestionText[iRandomNumber]["question"]) {
-    correctAnswer = arrQuestionText[iRandomNumber]["answer"]
-} else {
-    correctAnswer = ""
-}    
+ 
+ 
+}
+let randomNextQuestion = 0
+let nextQuestions1 = ""
+function nextQuestions () {
+    qHealthEl.textContent = ""
+    if (arrQuestionText[randomNextQuestion].ifAsked == false ) {
+        randomNextQuestion = Math.floor( Math.random()*2)
+        let nextQuestions = arrQuestionText[randomNextQuestion]["question"] 
+        if (nextQuestions == arrQuestionText[randomNextQuestion]["question"]) {
+            correctAnswer = arrQuestionText[randomNextQuestion]["answer"]
+        } else {
+            correctAnswer = ""
+        }    
+        displayEl.textContent = nextQuestion + "?"   
+        document.getElementById("firstAnswer").style.visibility = "visible"
+        document.getElementById("secondAnswer").style.visibility = "visible"
+        document.getElementById("thirdAnswer").style.visibility = "visible"
+        document.getElementById("tryagain").style.visibility = "hidden"
+    }
 }
