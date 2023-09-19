@@ -126,41 +126,48 @@ function tryAgain() {
 }
 
 let allQuestionsAsked = true
-let iQuestionsAsked = 0
+let randomIndex = 0
 function nextQuestion() {   
-   for ( iQuestionsAsked = 0; iQuestionsAsked < arrQuestionText.length; iQuestionsAsked++) {
-    if (arrQuestionText[iQuestionsAsked].ifAsked == false ) {
+   
+for (const question of arrQuestionText) {
+    if (!question.ifAsked) {
         allQuestionsAsked = false
         break
     }
-   }
-if (allQuestionsAsked == false) {
-    do {
-       nextQuestion() 
-    } while (arrQuestionText[iQuestionsAsked].ifasked == false)
+}
 
-}else {
-    console.log("All Questions have been asked")
+if (!allQuestionsAsked) {
+do {
+    randomIndex = Math.floor(Math.random() * arrQuestionText.length -1)
+} while (arrQuestionText[iRandomNumber].ifAsked == false)
+arrQuestionText[iRandomNumber].ifAsked = true
+loadQuesion()
+} else {
+    console.log("All Questions Have Been Asked")
 }
  
- 
+
 }
-let randomNextQuestion = 0
+
+ 
 let nextQuestions1 = ""
-function nextQuestions () {
+function loadQuesion () {
     qHealthEl.textContent = ""
-    if (arrQuestionText[randomNextQuestion].ifAsked == false ) {
-        randomNextQuestion = Math.floor( Math.random()*2)
-        let nextQuestions = arrQuestionText[randomNextQuestion]["question"] 
-        if (nextQuestions == arrQuestionText[randomNextQuestion]["question"]) {
-            correctAnswer = arrQuestionText[randomNextQuestion]["answer"]
+    if (arrQuestionText[iRandomNumber].ifAsked == true ) {
+        iRandomNumber = Math.floor( Math.random()*2) + 1
+        firtsQuestion = arrQuestionText[iRandomNumber]["question"] 
+        displayEl.textContent = firtsQuestion + "?" 
+        if (firtsQuestion == arrQuestionText[iRandomNumber]["question"]) {
+            correctAnswer = arrQuestionText[iRandomNumber]["answer"]
         } else {
             correctAnswer = ""
         }    
-        displayEl.textContent = nextQuestion + "?"   
         document.getElementById("firstAnswer").style.visibility = "visible"
         document.getElementById("secondAnswer").style.visibility = "visible"
         document.getElementById("thirdAnswer").style.visibility = "visible"
-        document.getElementById("tryagain").style.visibility = "hidden"
+        qHealthEl.textContent = ""
+        document.getElementById("tryagain").style.visibility = "hidden" 
+    } else {
+        alert ("all questions have been asked")
     }
 }
