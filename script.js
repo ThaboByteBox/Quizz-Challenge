@@ -6,16 +6,17 @@ const arrQuestionText = [
 ]
 document.getElementById("playAgain").style.visibility = "hidden"
 document.getElementById("tryagain").style.visibility = "hidden"
-
+let randomIndexer = questionIndex()
 function questionIndex() {
-    let randomNumber = Math.floor(Math.random() * 2)
+    let randomNumber = Math.floor(Math.random() * 3) 
     return randomNumber
 }
 function retrieveAnswer () {
- let indexer = questionIndex()
+ let AnswerIndexer = randomIndexer
  let correctAnswer = ""
- if (askedQuestion() == arrQuestionText[indexer]["question"]) {
-    correctAnswer = arrQuestionText[indexer]["answer"]
+ let questionAsked = askedQuestion()
+ if (questionAsked == arrQuestionText[AnswerIndexer]["question"]) {
+    correctAnswer = arrQuestionText[AnswerIndexer]["answer"]
 } else {
     correctAnswer = ""
 } 
@@ -23,11 +24,11 @@ return correctAnswer
 }
 
 function askedQuestion () {
-    let indexer = questionIndex()
-    let questionAsked = arrQuestionText[indexer]["question"]
+    let questionIndexer = randomIndexer
+    let questionAsked = arrQuestionText[questionIndexer]["question"]
     return questionAsked
 }
-
+//console.log(askedQuestion())
 /**
  * enables the visibilty of the other buttons and hides the Begin game
  * @returns  Question from the arrQuestionTex array
@@ -38,11 +39,7 @@ function beginQuizHandler() {
     document.getElementById("secondOption").innerText = arrQuestionText[1]["answer"]
     document.getElementById("thirdOption").innerText = arrQuestionText[2]["answer"]
     document.getElementById("startQuiz").style.visibility = "hidden"
-    document.getElementById("playAgain").style.visibility = "visible"
-    document.getElementById("tryagain").style.visibility = "visible"
-
     let questionDisplayEl = document.getElementById("questionText")
-    
     
     questionDisplayEl.innerHTML = askedQuestion() + "?"
     
@@ -51,23 +48,16 @@ function beginQuizHandler() {
 
 
 
-function loadAnswer () {
-    let correctAnswer = retrieveAnswer()
-    let indexer = 0
+function loadFeedback () {
+    
     let questionFeedbackEl = document.getElementById("questionFeedback")
-    if (correctAnswer == arrQuestionText[indexer]["answer"]) {
-        questionFeedbackEl.innerHTML = "Correct!"
-    } else {
-        questionFeedbackEl.innerHTML = "Incorrect! The correct answer is: " + correctAnswer
-    }   
+    questionFeedbackEl.innerHTML = "Correct!"   
     document.getElementById("firstOption").style.visibility = "hidden"
     document.getElementById("secondOption").style.visibility = "hidden"
     document.getElementById("thirdOption").style.visibility = "hidden"
     if (questionFeedbackEl == "Correct!") {
         document.getElementById("playAgain").style.visibility = "visible"
-        arrQuestionText[indexer].ifAsked = true
     } else {
-        alert("Try Again")
         document.getElementById("tryagain").style.visibility = "visible"
     }
 }
@@ -76,61 +66,61 @@ function loadAnswer () {
  * Loads the value of the guess and check if the guess is correct 
  */
 function firstOption() {
-    loadAnswer()
+   let correctAnswer = retrieveAnswer ()
+   let compareAnswer = document.getElementById("firstOption").innerText
+   let feedback = document.getElementById("questionFeedback") 
+   if ( compareAnswer == correctAnswer) {
+        arrQuestionText[0].ifAsked = true
+        loadFeedback()
+   } else {
+    feedback.innerHTML = "Incorrect, Try Again!"
+    arrQuestionText[0].ifAsked = false
+   }
 }
 
 function secondOption() {
-    if (correctAnswer == arrQuestionText[1]["answer"]) {
-        qHealthEl.textContent = "Correct!"
+    let correctAnswer = retrieveAnswer ()
+    let compareAnswer = document.getElementById("secondOption").innerText
+    let feedback = document.getElementById("questionFeedback") 
+    if ( compareAnswer == correctAnswer) {
+         arrQuestionText[1].ifAsked = true
+         loadFeedback()
     } else {
-        qHealthEl.textContent = "Incorrect! The correct answer is: " + correctAnswer
-    }
-    document.getElementById("firstAnswer").style.visibility = "hidden"
-    document.getElementById("secondAnswer").style.visibility = "hidden"
-    document.getElementById("thirdAnswer").style.visibility = "hidden"
-    if (qHealthEl.textContent == "Correct!") {
-        document.getElementById("playAgain").style.visibility = "visible"
-        arrQuestionText[1].ifAsked = true
-    } else {
-        alert("Try Again")
-        document.getElementById("tryagain").style.visibility = "visible"
+     feedback.innerHTML = "Incorrect, Try Again!"
+     arrQuestionText[1].ifAsked = false
     }
 }
 
 function thirdOption() {
-    if (correctAnswer == arrQuestionText[2]["answer"]) {
-        qHealthEl.textContent = "Correct!"
+    let correctAnswer = retrieveAnswer ()
+    let compareAnswer = document.getElementById("thirdOption").innerText
+    let feedback = document.getElementById("questionFeedback") 
+    if ( compareAnswer == correctAnswer) {
+         arrQuestionText[2].ifAsked = true
+         loadFeedback()
     } else {
-        qHealthEl.textContent = "Incorrect! The correct answer is: " + correctAnswer
+     feedback.innerHTML = "Incorrect, Try Again!"
+     arrQuestionText[2].ifAsked = false
     }
-    document.getElementById("firstAnswer").style.visibility = "hidden"
-    document.getElementById("secondAnswer").style.visibility = "hidden"
-    document.getElementById("thirdAnswer").style.visibility = "hidden"
-    if (qHealthEl.textContent == "Correct!") {
-        document.getElementById("playAgain").style.visibility = "visible"
-        arrQuestionText[2].ifAsked = true
-    } else {
-        alert("Try Again")
-        document.getElementById("tryagain").style.visibility = "visible"
-    }
-
 }
-
-function tryAgain() {
-
-    iRandomNumber = Math.floor(Math.random() * 2) + 1
-    firtsQuestion = arrQuestionText[iRandomNumber]["question"]
-    displayEl.textContent = firtsQuestion + "?"
-    if (firtsQuestion == arrQuestionText[iRandomNumber]["question"]) {
-        correctAnswer = arrQuestionText[iRandomNumber]["answer"]
+let tryAgainIndex = questionIndex()
+function tryAgain (){
+    let questionDisplayEl = document.getElementById("questionText")
+    let feedbackDisplayEl = document.getElementById("questionFeedback")
+    let questionAsked = arrQuestionText[tryAgainIndex]["question"]
+    feedbackDisplayEl.innerHTML = ""
+    questionDisplayEl.innerHTML = arrQuestionText[tryAgainIndex]["question"] + "?"
+    document.getElementById("firstOption").style.visibility = "visible"
+    document.getElementById("secondOption").style.visibility = "visible"
+    document.getElementById("thirdOption").style.visibility = "visible" 
+    if (questionAsked == arrQuestionText[tryAgainIndex]["question"]) {
+        correctAnswer = arrQuestionText[tryAgainIndex]["answer"]
     } else {
         correctAnswer = ""
-    }
-    document.getElementById("firstAnswer").style.visibility = "visible"
-    document.getElementById("secondAnswer").style.visibility = "visible"
-    document.getElementById("thirdAnswer").style.visibility = "visible"
-    qHealthEl.textContent = ""
-    document.getElementById("tryagain").style.visibility = "hidden"
+    }      
+}
+function tryAgainHandler() {
+    tryAgain()
 }
 
 let allQuestionsAsked = true

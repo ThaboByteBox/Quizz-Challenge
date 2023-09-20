@@ -8,16 +8,20 @@
    
 </head>
 <body>
-  <p id="questionText"></p>
-  <p id="questionFeedback"></p>
-  <button id="firstOption" onclick="firstOption()"></button>
-  <button id="secondOption" onclick="sceondOption()"></button>
-  <button id="thirdOption" onclick="thirdOption()"></button>
-  <button id="playAgain" onclick="nextQuestion()">Next Question</button>
-  <button id="startQuiz" onclick="beginQuizHandler()"> Begin Quiz</button>
-  <button id="tryagain" onclick="tryAgain()">Try Again</button>
-  <button type="reset" onclick="location.href='https://thabo.bytebox.co.za/'">
-    Home</button>
+  <div id="displays">
+      <div id="questionText"></div>
+      <div id="questionFeedback"></div>
+  </div>
+  <div>
+      <button id="firstOption" onclick="firstOption()"></button>
+      <button id="secondOption" onclick="secondOption()"></button>
+      <button id="thirdOption" onclick="thirdOption()"></button>
+      <button id="playAgain" onclick="nextQuestion()">Next Question</button>
+      <button id="startQuiz" onclick="beginQuizHandler()"> Begin Quiz</button>
+      <button id="tryagain" onclick="tryAgainHandler()">Try Again</button>
+      <button type="reset" onclick="location.href='https://thabo.bytebox.co.za/'">
+        Home</button>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
