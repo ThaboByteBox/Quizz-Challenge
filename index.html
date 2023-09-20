@@ -14,9 +14,9 @@
       <div id="questionFeedback"></div>
   </div>
   <div id="buttons">
-      <a class="waves-effect waves-light btn" id="firstOption" onclick="firstOption()"></a>
-      <a class="waves-effect waves-light btn" id="secondOption" onclick="secondOption()"></a>
-      <a class="waves-effect waves-light btn" id="thirdOption" onclick="thirdOption()"></a>
+      <a class="waves-effect waves-light btn" id="firstOption" onclick="checkAnswer(this.textContent)"></a>
+      <a class="waves-effect waves-light btn" id="secondOption" onclick="checkAnswer(this.textContent)"></a>
+      <a class="waves-effect waves-light btn" id="thirdOption" onclick="checkAnswer(this.textContent)"></a>
       <a class="waves-effect waves-light btn" id="playAgain" onclick="nextQuestion()">Next Question</a>
       <a class="waves-effect waves-light btn" id="startQuiz" onclick="beginQuizHandler()">Begin Quiz</a>
       <a class="waves-effect waves-light btn" id="tryagain" onclick="tryAgainHandler()">Try Again</a>

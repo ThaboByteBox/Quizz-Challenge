@@ -61,60 +61,32 @@ function loadFeedback () {
     document.getElementById("firstOption").style.visibility = "hidden"
     document.getElementById("secondOption").style.visibility = "hidden"
     document.getElementById("thirdOption").style.visibility = "hidden"
-    if (questionFeedbackEl == "Correct!") {
+    if (questionFeedbackEl.textContent == "Correct!") {
         document.getElementById("playAgain").style.visibility = "visible"
-    } else {
-        document.getElementById("tryagain").style.visibility = "visible"
-    }
+    } 
 }
 
 /**
  * Loads the value of the guess and check if the guess is correct 
  */
-function firstOption() {
+
+function checkAnswer(val){
    let correctAnswer = retrieveAnswer ()
-   let compareAnswer = document.getElementById("firstOption").textContent
+   let compareAnswer = val
    let feedback = document.getElementById("questionFeedback") 
    if ( compareAnswer == correctAnswer) {
-        arrQuestionText[0].ifAsked = true
         correctAnswer = ""
         loadFeedback()
    } else {
     feedback.innerHTML = "Incorrect, Try Again!"
-    arrQuestionText[0].ifAsked = false
+    document.getElementById("tryagain").style.visibility = "visible"
    }
-}
 
-function secondOption() {
-    let correctAnswer = retrieveAnswer ()
-    let compareAnswer = document.getElementById("secondOption").textContent
-    let feedback = document.getElementById("questionFeedback") 
-    if ( compareAnswer == correctAnswer) {
-         arrQuestionText[1].ifAsked = true
-         loadFeedback()
-         correctAnswer = ""
-    } else {
-     feedback.innerHTML = "Incorrect, Try Again!"
-     arrQuestionText[1].ifAsked = false
-    }
-}
-
-function thirdOption() {
-    let correctAnswer = retrieveAnswer ()
-    let compareAnswer = document.getElementById("thirdOption").textContent
-    let feedback = document.getElementById("questionFeedback") 
-    if ( compareAnswer == correctAnswer) {
-         arrQuestionText[2].ifAsked = true
-         correctAnswer = ""
-         loadFeedback()
-    } else {
-     feedback.innerHTML = "Incorrect, Try Again!"
-     arrQuestionText[2].ifAsked = false
-    }
 }
 
 function tryAgain (){
     let tryAgainIndex = questionIndex()
+    retrieveAnswer()
     let correctAnswer = retrieveAnswer()
     let questionDisplayEl = document.getElementById("questionText")
     let feedbackDisplayEl = document.getElementById("questionFeedback")
@@ -128,8 +100,7 @@ function tryAgain (){
         correctAnswer = arrQuestionText[tryAgainIndex]["answer"]
     } else {
         correctAnswer = ""
-    }  
-    console.log(correctAnswer)   
+    }     
 }
 function tryAgainHandler() {
     tryAgain()
