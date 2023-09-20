@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Challenge</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
    
 </head>
 <body>
@@ -12,16 +13,16 @@
       <div id="questionText"></div>
       <div id="questionFeedback"></div>
   </div>
-  <div>
-      <button id="firstOption" onclick="firstOption()"></button>
-      <button id="secondOption" onclick="secondOption()"></button>
-      <button id="thirdOption" onclick="thirdOption()"></button>
-      <button id="playAgain" onclick="nextQuestion()">Next Question</button>
-      <button id="startQuiz" onclick="beginQuizHandler()"> Begin Quiz</button>
-      <button id="tryagain" onclick="tryAgainHandler()">Try Again</button>
-      <button type="reset" onclick="location.href='https://thabo.bytebox.co.za/'">
-        Home</button>
+  <div id="buttons">
+      <a class="waves-effect waves-light btn" id="firstOption" onclick="firstOption()"></a>
+      <a class="waves-effect waves-light btn" id="secondOption" onclick="secondOption()"></a>
+      <a class="waves-effect waves-light btn" id="thirdOption" onclick="thirdOption()"></a>
+      <a class="waves-effect waves-light btn" id="playAgain" onclick="nextQuestion()">Next Question</a>
+      <a class="waves-effect waves-light btn" id="startQuiz" onclick="beginQuizHandler()">Begin Quiz</a>
+      <a class="waves-effect waves-light btn" id="tryagain" onclick="tryAgainHandler()">Try Again</a>
+      <a class="waves-effect waves-light btn" id="home" onclick="location.href='https://thabo.bytebox.co.za/'">Home</a>
   </div>
   <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

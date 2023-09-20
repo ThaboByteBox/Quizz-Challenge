@@ -6,6 +6,9 @@ const arrQuestionText = [
 ]
 document.getElementById("playAgain").style.visibility = "hidden"
 document.getElementById("tryagain").style.visibility = "hidden"
+document.getElementById("firstOption").style.visibility = "hidden"
+document.getElementById("secondOption").style.visibility = "hidden"
+document.getElementById("thirdOption").style.visibility = "hidden"
 let randomIndexer = questionIndex()
 function questionIndex() {
     let randomNumber = Math.floor(Math.random() * 3) 
@@ -35,9 +38,12 @@ function askedQuestion () {
  */
 function beginQuizHandler() {
     
-    document.getElementById("firstOption").innerText = arrQuestionText[0]["answer"]
-    document.getElementById("secondOption").innerText = arrQuestionText[1]["answer"]
-    document.getElementById("thirdOption").innerText = arrQuestionText[2]["answer"]
+    document.getElementById("firstOption").textContent = arrQuestionText[0]["answer"]
+    document.getElementById("secondOption").textContent = arrQuestionText[1]["answer"]
+    document.getElementById("thirdOption").textContent = arrQuestionText[2]["answer"]
+    document.getElementById("firstOption").style.visibility = "visible"
+    document.getElementById("secondOption").style.visibility = "visible"
+    document.getElementById("thirdOption").style.visibility = "visible"
     document.getElementById("startQuiz").style.visibility = "hidden"
     let questionDisplayEl = document.getElementById("questionText")
     
@@ -67,10 +73,11 @@ function loadFeedback () {
  */
 function firstOption() {
    let correctAnswer = retrieveAnswer ()
-   let compareAnswer = document.getElementById("firstOption").innerText
+   let compareAnswer = document.getElementById("firstOption").textContent
    let feedback = document.getElementById("questionFeedback") 
    if ( compareAnswer == correctAnswer) {
         arrQuestionText[0].ifAsked = true
+        correctAnswer = ""
         loadFeedback()
    } else {
     feedback.innerHTML = "Incorrect, Try Again!"
@@ -80,11 +87,12 @@ function firstOption() {
 
 function secondOption() {
     let correctAnswer = retrieveAnswer ()
-    let compareAnswer = document.getElementById("secondOption").innerText
+    let compareAnswer = document.getElementById("secondOption").textContent
     let feedback = document.getElementById("questionFeedback") 
     if ( compareAnswer == correctAnswer) {
          arrQuestionText[1].ifAsked = true
          loadFeedback()
+         correctAnswer = ""
     } else {
      feedback.innerHTML = "Incorrect, Try Again!"
      arrQuestionText[1].ifAsked = false
@@ -93,18 +101,21 @@ function secondOption() {
 
 function thirdOption() {
     let correctAnswer = retrieveAnswer ()
-    let compareAnswer = document.getElementById("thirdOption").innerText
+    let compareAnswer = document.getElementById("thirdOption").textContent
     let feedback = document.getElementById("questionFeedback") 
     if ( compareAnswer == correctAnswer) {
          arrQuestionText[2].ifAsked = true
+         correctAnswer = ""
          loadFeedback()
     } else {
      feedback.innerHTML = "Incorrect, Try Again!"
      arrQuestionText[2].ifAsked = false
     }
 }
-let tryAgainIndex = questionIndex()
+
 function tryAgain (){
+    let tryAgainIndex = questionIndex()
+    let correctAnswer = retrieveAnswer()
     let questionDisplayEl = document.getElementById("questionText")
     let feedbackDisplayEl = document.getElementById("questionFeedback")
     let questionAsked = arrQuestionText[tryAgainIndex]["question"]
@@ -117,7 +128,8 @@ function tryAgain (){
         correctAnswer = arrQuestionText[tryAgainIndex]["answer"]
     } else {
         correctAnswer = ""
-    }      
+    }  
+    console.log(correctAnswer)   
 }
 function tryAgainHandler() {
     tryAgain()
